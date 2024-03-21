@@ -46,8 +46,8 @@ module.exports = configure(function (/* ctx */) {
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#build
     build: {
-      //distDir: '../cosmic-adventures/src/main/resources/static',
-      // distDir가 현재 Front 프로젝트를 어디에 빌드할지 정하는 설정입니다. 주석을 풀고 저희 백엔드프로젝트의/resources/static 에 빌드하면 그때 연결이 됩니다.   
+      distDir: '../cosmic-adventures/src/main/resources/static',
+      // distDir가 현재 Front 프로젝트를 어디에 빌드할지 정하는 설정입니다. 주석을 풀고 저희 백엔드프로젝트의/resources/static 에 빌드하면 그때 연결이 됩니다.
       target: {
         browser: [ 'es2019', 'edge88', 'firefox78', 'chrome87', 'safari13.1' ],
         node: 'node20'
