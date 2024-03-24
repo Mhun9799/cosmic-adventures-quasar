@@ -59,6 +59,10 @@ export default {
     };
   },
   methods: {
+    socialLogin(provider) {
+      // 소셜 로그인 엔드포인트로 리다이렉트
+      window.location.href = `http://localhost:8080/oauth2/login/${provider}`;
+    },
     login() {
       const loginData = {
         email: this.email,
@@ -72,8 +76,9 @@ export default {
           const authorizationHeader = response.headers['authorization'];
           console.log(response)
           const accessToken = authorizationHeader.split(' ')[1]; // Bearer 토큰을 제외하고 추출
-          // 추출한 토큰을 로컬 스토리지에 저장
-          localStorage.setItem('Authorization', accessToken);
+          // 추출한 토큰을 쿠키 저장
+          document.cookie = `Authorization=${accessToken}; path=/`;
+
           const { name } = response.data;
           alert(`${name}님 환영합니다!`);
           window.location.href = 'http://localhost:9000';
@@ -101,20 +106,20 @@ export default {
     },
     redirectToNaverLogin() {
       // 네이버 소셜 로그인 엔드포인트로 리다이렉트
-      window.location.href = "http://localhost:8080/oauth2/login/naver";
+      this.socialLogin('naver');
+
     },
     redirectToKakaoLogin() {
       // 카카오 소셜 로그인 엔드포인트로 리다이렉트
-      window.location.href = "http://localhost:8080/oauth2/login/kakao";
+      this.socialLogin('kakao');
     },
     redirectToGoogleLogin() {
       // 카카오 소셜 로그인 엔드포인트로 리다이렉트
-      window.location.href = "http://localhost:8080/oauth2/login/google";
+      this.socialLogin('google');
     },
 
-    socialLogin(platform) {
-      // 소셜 로그인 로직을 여기에 작성합니다.
-    },
+
+
     goTo(path) {
       this.$router.push(path);
     },

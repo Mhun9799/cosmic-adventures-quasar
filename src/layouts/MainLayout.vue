@@ -4,7 +4,7 @@
       <q-toolbar>
         <q-toolbar-title>  Cosmic-Adventures </q-toolbar-title>
         <q-space />
-        <q-btn flat label="IssTracker" @click="goTo('/isstracker')" />
+        <q-btn flat label="Iss우주정거장" @click="goTo('/isstracker')" />
         <q-btn flat label="뉴스" @click="goTo('/news')" />
         <q-btn flat label="커뮤니티" @click="goTo('/community')" />
         <q-btn flat label="로그아웃" @click="logout" />
@@ -20,6 +20,8 @@
 </template>
 
 <script>
+import {Cookies} from "quasar";
+
 export default {
   data() {
     return {
@@ -35,14 +37,14 @@ export default {
     },
     logout() {
       // 엑세스 토큰 삭제
-      localStorage.removeItem('Authorization');
+      Cookies.remove('Authorization');
       // 로그인 상태 갱신
       this.accessToken = null;
       // 로그인 페이지로 이동
       this.goTo('/login');
     },
     checkAccessToken() {
-      const storedToken = localStorage.getItem('Authorization');
+      const storedToken = Cookies.get('Authorization');
       if (storedToken) {
         // 토큰이 있으면 mypage로 이동
         this.goTo('/mypage');
