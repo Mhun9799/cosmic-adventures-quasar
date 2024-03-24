@@ -26,35 +26,63 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   data() {
     return {
       userProfile: {
-        name: 'John Doe',
-        email: 'johndoe@email.com',
-        introduction: 'A short introduction about myself.',
-        profilePicUrl: 'https://i.pravatar.cc/150?u=johndoe' // A placeholder image URL
+        name: '',
+        email: '',
+        introduction: '',
+        profilePicUrl: ''
       },
       defaultAvatar: 'https://cdn.quasar.dev/img/boy-avatar.png'
     };
   },
 
+  mounted() {
+    this.fetchUserProfile();
+  },
+
   methods: {
-    editIntroduction() {
-      // Logic to open a dialog or form to edit the introduction
+    fetchUserProfile() {
+      const token = this.getAccessTokenFromCookie(); // 쿠키에서 엑세스 토큰 가져오기
+      if (!token) {
+        console.error('Access token not found in cookie.');
+        return;
+      }
+      axios.get('http://localhost:8080/api/v1/users/profile', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+        .then(response => {
+          console.log(response);
+          const { name, email, introduction, profilePicUrl } = response.data;
+          this.userProfile = {
+            name: name || '',
+            email: email || '',
+            introduction: introduction || '',
+            profilePicUrl: profilePicUrl && profilePicUrl.length > 0 ? profilePicUrl[0].replace(/"/g, '') : ''
+          };
+        })
+        .catch(error => console.error('Error fetching user profile:', error));
     },
+
+    getAccessTokenFromCookie() {
+      const cookie = document.cookie;
+      const token = cookie.split('; ').find(row => row.startsWith('Authorization='));
+      return token ? token.split('=')[1] : null;
+    },
+
+    editIntroduction() {
+      // 소개를 수정하는 다이얼로그나 폼을 열기 위한 로직
+    },
+
     goTo(routeName) {
       this.$router.push(`/mypage/${routeName}`);
     }
-  },
-
-  // ... (Add a method to fetch user profile data on page load )
+  }
 };
 </script>
-
-<style scoped>
-/* Add styling for layout and elements */
-.my-page-container {
-  width: 800px; /* Adjust the width as needed */
-}
-</style>
