@@ -12,6 +12,8 @@ const routes = [
       { path: "/signup", component: () => import("pages/SignupPage.vue") },
       { path: "/mypage", component: () => import("pages/MyPage.vue") },
       { path: "/isstracker", component: () => import("pages/ISSTrackerPage.vue") },
+      { path: 'posts/create', component: () => import('pages/PostCreate.vue') },
+      { path: 'posts/:postId', component: () => import('pages/PostDisplay.vue') },
     ],
   },
 
