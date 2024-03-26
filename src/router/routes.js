@@ -14,6 +14,10 @@ const routes = [
       { path: "/isstracker", component: () => import("pages/ISSTrackerPage.vue") },
       { path: 'posts/create', component: () => import('pages/PostCreate.vue') },
       { path: 'posts/:postId', component: () => import('pages/PostDisplay.vue') },
+      { path: "/edit_profile", component: () => import("pages/Edit_profile.vue") },
+      { path: "/Myposts", component: () => import("pages/MyPosts.vue") },
+
+
     ],
   },
 

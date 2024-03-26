@@ -30,6 +30,8 @@
 
       <q-card-section class="text-right">
         <q-btn label="가입하기" color="primary" @click="signup" />
+        <!-- 에러 메시지 표시 -->
+        <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
       </q-card-section>
     </q-card>
   </q-page>
@@ -52,14 +54,15 @@ export default {
       roleOptions: [ // 역할 선택 옵션
         {label: '일반 사용자', value: 'USER'},
         {label: '관리자', value: 'ADMIN'}
-      ]
+      ],
+      errorMessage: '' // 에러 메시지를 저장할 변수 추가
     };
   },
   methods: {
     signup() {
       // Input Validation
       if (!this.name || !this.email || !this.password || !this.confirmpassword) {
-        console.error('필수 정보를 입력하세요.');
+        this.errorMessage = '필수 정보를 입력하세요.';
         return;
       }
 
@@ -87,11 +90,12 @@ export default {
           // Handle success response
           console.log('Signup successful', response.data);
           alert('회원가입이 완료되었습니다.');
-          this.$router.push('/login')
+          this.$router.push('/login');
         })
         .catch(error => {
           // Handle error response
           console.error('Signup failed', error.response.data);
+          this.errorMessage = error.response.data.message; // 백엔드에서 받은 에러 메시지를 사용자에게 표시
         });
     },
 
@@ -102,3 +106,10 @@ export default {
   },
 };
 </script>
+
+<style>
+.error-message {
+  color: red;
+  margin-top: 10px;
+}
+</style>
