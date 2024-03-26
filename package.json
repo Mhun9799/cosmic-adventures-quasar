@@ -20,6 +20,7 @@
     "pages": "^0.0.16",
     "quasar": "^2.8.0",
     "vue": "^3.4.18",
+    "vue-cookie": "^1.1.4",
     "vue-router": "^4.0.12"
   },
   "devDependencies": {

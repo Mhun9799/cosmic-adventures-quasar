@@ -15,17 +15,15 @@ import {useRouter} from "vue-router";
 const $q = useQuasar();
 const router = useRouter(); // Get the router instance
 
-const posts = ref([
-  { id: '1', title: 'Sample Post 1', content: '...', readCount: 10, commentCount: 2, likeCount: 5, authorImage: 'https://i.pravatar.cc/150?u=user1' },
-  { id: '2', title: 'Another Great Post', content: '...', readCount: 5, commentCount: 0, likeCount: 2, authorImage: 'https://i.pravatar.cc/150?u=user2' }
-]);
+const posts = ref([]);
 
 onMounted(async () => {
   try {
-    const response = await axios.get('http://your-backend-api/boards');
+    const response = await axios.get('http://localhost:8080/boards/creates');
+    console.log(response.data)
     posts.value = response.data;
   } catch (error) {
-    // Handle API errors (show an error message maybe)
+    console.error('Error fetching posts:', error);
   }
 });
 
@@ -37,4 +35,5 @@ function navigateToCreatePost() {
     // Maybe display an error message to the user
   }
 }
+
 </script>

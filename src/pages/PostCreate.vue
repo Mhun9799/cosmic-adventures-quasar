@@ -8,29 +8,35 @@
     </q-form>
   </q-page>
 </template>
-
 <script setup>
 import { ref } from 'vue';
 import axios from 'axios';
+import { useRouter } from 'vue-router';
 
 const postTitle = ref('');
 const postContent = ref('');
 const postImages = ref([]);
+const router = useRouter();
 
 async function submitPost() {
   const formData = new FormData();
   formData.append('title', postTitle.value);
   formData.append('content', postContent.value);
-
   postImages.value.forEach(file => formData.append('images', file));
 
   try {
-    await axios.post('http://your-backend-api/boards', formData, {
-      headers: {'Content-Type': 'multipart/form-data'}
+    const token = document.cookie.split('; ').find(row => row.startsWith('Authorization=')).split('=')[1];
+    // 쿠키에서 토큰 가져오기
+
+    await axios.post('http://localhost:8080/boards', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        'Authorization': `Bearer ${token}` // 쿠키에서 가져온 토큰 사용
+      }
     });
-    // Success! Maybe redirect to post display
+    await router.push('/community');
   } catch (error) {
-    // Handle API errors
+    console.error('Error fetching post:', error);
   }
 }
 </script>
