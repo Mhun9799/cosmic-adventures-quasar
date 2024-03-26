@@ -12,6 +12,7 @@
 import { ref } from 'vue';
 import axios from 'axios';
 import { useRouter } from 'vue-router';
+import {apiClient} from "src/api/apiClient";
 
 const postTitle = ref('');
 const postContent = ref('');
@@ -25,14 +26,10 @@ async function submitPost() {
   postImages.value.forEach(file => formData.append('images', file));
 
   try {
-    const token = document.cookie.split('; ').find(row => row.startsWith('Authorization=')).split('=')[1];
+    // const token = document.cookie.split('; ').find(row => row.startsWith('Authorization=')).split('=')[1];
     // 쿠키에서 토큰 가져오기
 
-    await axios.post('http://localhost:8080/boards', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-        'Authorization': `Bearer ${token}` // 쿠키에서 가져온 토큰 사용
-      }
+    await apiClient.post('/boards', formData, {
     });
     await router.push('/community');
   } catch (error) {
