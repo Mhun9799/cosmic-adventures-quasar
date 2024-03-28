@@ -16,6 +16,7 @@ const routes = [
       { path: 'posts/:postId', component: () => import('pages/PostDisplay.vue') },
       { path: "/edit_profile", component: () => import("pages/Edit_profile.vue") },
       { path: "/Myposts", component: () => import("pages/MyPosts.vue") },
+      { path: "/posts/:postId/edit", component: () => import("pages/PostUpdate.vue")}
 
 
     ],
