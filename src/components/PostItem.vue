@@ -1,5 +1,5 @@
 <template>
-  <q-item clickable :to="`/posts/${post.id}`">
+  <q-item clickable :to="`/posts/${post.id}`" class="post-item">
     <q-item-section avatar>
       <q-avatar size="md">
         <img :src="post.authorImage || defaultAvatar" />
@@ -17,6 +17,7 @@
         <div class="col">
           <q-icon name="chat" size="sm" /> {{ post.commentCount }}
         </div>
+
         <div class="col">
           <q-icon name="favorite" size="sm" /> {{ post.likeCount }}
         </div>
@@ -35,3 +36,13 @@ defineProps({
 
 const defaultAvatar = 'https://cdn.quasar.dev/img/boy-avatar.png'; // Or any placeholder image
 </script>
+
+
+<style scoped>
+.post-item {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+</style>

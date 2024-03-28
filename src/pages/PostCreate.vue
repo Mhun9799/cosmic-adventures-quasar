@@ -10,7 +10,6 @@
 </template>
 <script setup>
 import { ref } from 'vue';
-import axios from 'axios';
 import { useRouter } from 'vue-router';
 import {apiClient} from "src/api/apiClient";
 
@@ -26,9 +25,7 @@ async function submitPost() {
   postImages.value.forEach(file => formData.append('images', file));
 
   try {
-    // const token = document.cookie.split('; ').find(row => row.startsWith('Authorization=')).split('=')[1];
-    // 쿠키에서 토큰 가져오기
-
+    // 응답헤더에 토큰값도 같이 보내기
     await apiClient.post('/boards', formData, {
     });
     await router.push('/community');
