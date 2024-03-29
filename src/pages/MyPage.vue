@@ -2,24 +2,22 @@
   <q-page class="flex flex-center my-page">
     <div class="my-page-container q-pa-md">
       <div class="profile-section">
-        <q-avatar size="lg">
-          <img :src="userProfile.profilePicUrl || defaultAvatar" alt="" @click="openImageModal" style="cursor: pointer; max-width: 150px;" />
+        <q-avatar size="xl">
+          <img :src="userProfile.profilePicUrl || defaultAvatar" alt="" @click="openImageModal" style="cursor: pointer; max-width: 200px;" />
         </q-avatar>
         <div class="profile-info">
-          <div class="text-h6">{{ userProfile.name }}</div>
-          <div class="text-caption">{{ userProfile.email }}</div>
-          <div class="text-caption">{{ userProfile.tlno }}</div>
+          <div class="text-h4">{{ userProfile.name }}</div>
+          <div class="text-body1">{{ userProfile.email }}</div>
+          <div class="text-body1">{{ userProfile.tlno }}</div>
         </div>
       </div>
 
       <div class="intro-section">
-        <div class="text-subtitle1">{{ userProfile.introduction }}</div>
+        <div class="text-h6">한마디</div>
+        <div class="text-body1">{{ userProfile.introduction }}</div>
       </div>
 
       <div class="actions-section">
-        <q-btn label="내가 쓴 글" @click="goTo('MyPosts')" />
-        <q-btn label="내가 쓴 댓글" @click="goTo('myComments')" />
-        <q-btn label="좋아요 누른 글" @click="goTo('likedPosts')" />
       </div>
     </div>
 
@@ -38,6 +36,7 @@
 
 <script>
 import axios from 'axios';
+import {getAccessTokenFromCookie, refreshAccessToken, getRefreshTokenFromCookie} from 'src/Module/authModule'; // auth 모듈 임포트
 
 export default {
   data() {
@@ -59,46 +58,54 @@ export default {
   },
 
   methods: {
-    fetchUserProfile() {
-      const token = this.getAccessTokenFromCookie();
-      if (!token) {
-        console.error('Access token not found in cookie.');
-        return;
-      }
-      axios.get('http://localhost:8080/api/v1/users/profile', {
-        headers: {
-          Authorization: `Bearer ${token}`
+    async fetchUserProfile() {
+      try {
+        const token = await getAccessTokenFromCookie();
+        if (!token) {
+          console.error('Access token not found in cookie.');
+          return;
         }
-      })
-        .then(response => {
-          const {
-            name,
-            email,
-            introduction,
-            profilePicUrl,
-            tlno
-          } = response.data; //
-          this.userProfile = {
-            name: name || '',
-            email: email || '',
-            introduction: introduction || '',
-            profilePicUrl: profilePicUrl && profilePicUrl.length > 0 ? profilePicUrl[0].replace(/"/g, '') : '',
-            tlno: tlno || ''
-          };
-        })
-        .catch(error => console.error('Error fetching user profile:', error));
+        const response = await axios.get('http://localhost:8080/api/v1/users/profile', {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+
+        const {
+          name,
+          email,
+          introduction,
+          profilePicUrl,
+          tlno
+        } = response.data;
+        this.userProfile = {
+          name: name || '',
+          email: email || '',
+          introduction: introduction || '',
+          profilePicUrl: profilePicUrl && profilePicUrl.length > 0 ? profilePicUrl[0].replace(/"/g, '') : '',
+          tlno: tlno || ''
+        };
+      } catch (error) {
+        if (error.response && error.response.status === 401) {
+          const refreshToken = await getRefreshTokenFromCookie();
+          if (!refreshToken) {
+            console.error('Refresh token not found in cookie.');
+            return;
+          }
+          try {
+            const newAccessToken = await refreshAccessToken(refreshToken);
+            document.cookie = `Authorization=${newAccessToken}; path=/;`;
+            await this.fetchUserProfile();
+          } catch (error) {
+            console.error('Error refreshing access token:', error);
+            this.$router.push('/login');
+          }
+        } else {
+          console.error('Error fetching user profile:', error);
+        }
+      }
     },
 
-    getAccessTokenFromCookie() {
-      const cookie = document.cookie;
-      const token = cookie.split('; ').find(row => row.startsWith('Authorization='));
-      return token ? token.split('=')[1] : null;
-    },
-
-
-    goTo(routeName) {
-      this.$router.push(`/${routeName}`);
-    },
 
     openImageModal() {
       this.showImageModal = true;
@@ -107,24 +114,26 @@ export default {
     closeImageModal() {
       this.showImageModal = false;
     },
-
   }
 };
 </script>
 
 <style>
 .my-page {
-  background-color: #0D0D0D; /* 배경색을 우주 공간과 어울리는 검은색으로 설정 */
+  background-color: #0D0D0D; /* 검은 배경색 */
 }
 
 .my-page-container {
-  background-color: rgba(255, 255, 255, 0.8); /* 프로필 컨테이너를 투명하게 만들어 우주적인 느낌을 줌 */
-  border-radius: 10px; /* 컨테이너의 모서리를 부드럽게 만듦 */
+  background-color: white; /* 흰색 배경 */
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
 }
 
 .profile-section {
   display: flex;
   align-items: center;
+
 }
 
 .profile-info {
@@ -137,5 +146,12 @@ export default {
 
 .actions-section {
   margin-top: 20px; /* 액션 버튼과 다른 섹션 사이의 간격 설정 */
+}
+
+/* 텍스트 색상 변경 */
+.text-h4,
+.text-body1,
+.text-subtitle1 {
+  color: black; /* 검은색 텍스트 */
 }
 </style>

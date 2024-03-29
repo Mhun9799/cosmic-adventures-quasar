@@ -28,7 +28,7 @@ async function fetchPosts() {
   }
 
   try {
-    const response = await axios.get('http://localhost:8080/api/v1/users/boards', {
+    const response = await axios.get('http://localhost:8080/api/v1/users/liked-boards', {
       headers: {
         Authorization: `Bearer ${token}`
       }
