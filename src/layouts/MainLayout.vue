@@ -6,13 +6,13 @@
           @click="goTo('/main-layout')"
           class="clickable-title"
         >
-          Cosmic-Adventures
+          Observer
         </q-toolbar-title>
         <q-space />
         <q-btn flat label="오늘의 행성" @click="goTo('/apod')" />
         <q-btn flat label="로봇이 찍은 화성" @click="goTo('/mars')" />
         <q-btn flat label="Iss우주정거장" @click="goTo('/isstracker')" />
-        <q-btn flat label="뉴스" @click="goTo('/news')" />
+        <q-btn flat label="뉴스" @click="goTo('/pids')" />
         <q-btn flat label="커뮤니티" @click="goTo('/community')" />
         <q-space />
         <!-- 토글 메뉴 컴포넌트 추가 -->
