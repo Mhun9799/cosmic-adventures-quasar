@@ -1,5 +1,5 @@
 <template>
-  <q-page class="flex flex-center">
+  <q-page class="flex flex-center" style="background-color: #000;">
     <q-card class="q-pa-md" style="width: 400px">
       <q-card-section>
         <div class="text-h6">프로필 수정</div>

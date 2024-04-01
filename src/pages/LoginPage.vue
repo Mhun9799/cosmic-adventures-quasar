@@ -34,7 +34,9 @@
       </q-card-section>
       <q-card-section class="text-right">
         <q-btn flat label="아직 회원이 아니신가요?" @click="goTo('/signup')" />
+        <q-btn flat label="비밀번호를 잊어버리셨나요?" @click="goTo('/send-password-code')" />
       </q-card-section>
+
     </q-card>
   </q-page>
 </template>

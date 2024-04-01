@@ -42,10 +42,14 @@ export default {
 </script>
 
 <style scoped>
+body {
+  margin: 0; /* body 요소의 margin을 0으로 설정하여 전체 화면을 채움 */
+}
+
 .nasa-apod-container {
   background-color: #000;
   color: #fff; /* 텍스트 색상을 흰색으로 설정 */
-  padding: 100px; /* 내부 여백 추가 */
+  padding: 150px; /* 내부 여백 추가 */
   text-align: center; /* 텍스트와 이미지를 가운데 정렬 */
 }
 

@@ -1,26 +1,33 @@
 <template>
   <q-page class="flex flex-center my-page">
     <div class="my-page-container q-pa-md">
-      <div class="profile-section">
-        <q-avatar size="xl">
-          <img :src="userProfile.profilePicUrl || defaultAvatar" alt="" @click="openImageModal" style="cursor: pointer; max-width: 200px;" />
-        </q-avatar>
-        <div class="profile-info">
-          <div class="text-h4">{{ userProfile.name }}</div>
-          <div class="text-body1">{{ userProfile.email }}</div>
-          <div class="text-body1">{{ userProfile.tlno }}</div>
+      <!-- 프로필 이미지 -->
+      <div class="rocket-background">
+        <img :src="userProfile.profilePicUrl || defaultAvatar" alt="" class="profile-image" @click="openImageModal" style="cursor: pointer; max-width: 250px;" />
+        <div v-if="errorMessage" class="error-message">
+          {{ errorMessage }}
         </div>
       </div>
 
+      <!-- 이름 및 내용 -->
+      <div class="profile-info">
+        <div class="text-h4">{{ userProfile.name }}</div>
+        <div class="text-body1">{{ userProfile.email }}</div>
+        <div class="text-body1">{{ userProfile.tlno }}</div>
+      </div>
+
+      <!-- 소개 -->
       <div class="intro-section">
-        <div class="text-h6">한마디</div>
         <div class="text-body1">{{ userProfile.introduction }}</div>
       </div>
 
+      <!-- 액션 버튼 -->
       <div class="actions-section">
+        <!-- 액션 버튼 추가 -->
       </div>
     </div>
 
+    <!-- 이미지 모달 -->
     <q-dialog v-model="showImageModal" persistent>
       <q-card>
         <q-card-section>
@@ -31,12 +38,15 @@
         </q-card-actions>
       </q-card>
     </q-dialog>
+
+    <!-- 에러 메시지 -->
+
   </q-page>
 </template>
 
 <script>
 import axios from 'axios';
-import {getAccessTokenFromCookie, refreshAccessToken, getRefreshTokenFromCookie} from 'src/Module/authModule'; // auth 모듈 임포트
+import { getAccessTokenFromCookie, refreshAccessToken, getRefreshTokenFromCookie } from 'src/Module/authModule';
 
 export default {
   data() {
@@ -49,7 +59,8 @@ export default {
         tlno: ''
       },
       defaultAvatar: 'https://cdn.quasar.dev/img/boy-avatar.png',
-      showImageModal: false
+      showImageModal: false,
+      errorMessage: '' // 에러 메시지
     };
   },
 
@@ -62,7 +73,7 @@ export default {
       try {
         const token = await getAccessTokenFromCookie();
         if (!token) {
-          console.error('Access token not found in cookie.');
+          this.errorMessage = 'Access token not found in cookie.';
           return;
         }
         const response = await axios.get('http://localhost:8080/api/v1/users/profile', {
@@ -86,10 +97,12 @@ export default {
           tlno: tlno || ''
         };
       } catch (error) {
-        if (error.response && error.response.status === 401) {
+        if (error.response && error.response.status === 400) {
+          this.errorMessage = error.response.data.message;
+        } else if (error.response && error.response.status === 401) {
           const refreshToken = await getRefreshTokenFromCookie();
           if (!refreshToken) {
-            console.error('Refresh token not found in cookie.');
+            this.errorMessage = 'Refresh token not found in cookie.';
             return;
           }
           try {
@@ -97,16 +110,14 @@ export default {
             document.cookie = `Authorization=${newAccessToken}; path=/;`;
             await this.fetchUserProfile();
           } catch (error) {
-            console.error('Error refreshing access token:', error);
+            this.errorMessage = 'Error refreshing access token: ' + error.message;
             this.$router.push('/login');
           }
         } else {
-          console.error('Error fetching user profile:', error);
+          this.errorMessage = 'Error fetching user profile: ' + error.message;
         }
       }
     },
-
-
     openImageModal() {
       this.showImageModal = true;
     },
@@ -128,16 +139,17 @@ export default {
   border-radius: 10px;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+  text-align: center; /* 가운데 정렬 */
 }
 
-.profile-section {
-  display: flex;
-  align-items: center;
-
+.profile-image {
+  margin-bottom: 20px; /* 프로필 이미지 아래 여백 추가 */
 }
 
 .profile-info {
-  margin-left: 20px; /* 프로필 정보와 아바타 사이의 간격 설정 */
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 400px;  /* 프로필 정보의 최대 너비 지정 */
 }
 
 .intro-section {

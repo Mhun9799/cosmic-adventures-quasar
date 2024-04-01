@@ -1,8 +1,16 @@
 <template>
-  <div>
-    <h1>회원 탈퇴 페이지</h1>
-    <button @click="withdrawal">회원 탈퇴</button>
-  </div>
+  <q-page class="flex flex-center" style="background-color: #000;">
+    <q-card class="q-pa-md" style="width: 400px">
+      <q-card-section>
+        <div class="text-h6">정말 탈퇴를 하시겠습니까?</div>
+        <div class="text-h6">탈퇴 후 14일후에 정보가 삭제됩니다.</div>
+        <div class="text-h6">탈퇴 취소를 하면 다시 서비스 이용 가능합니다.</div>
+      </q-card-section>
+      <q-card-section>
+        <q-btn label="회원 탈퇴" color="negative" @click="withdrawal" />
+      </q-card-section>
+    </q-card>
+  </q-page>
 </template>
 
 <script>
@@ -49,3 +57,18 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.q-page {
+  background-color: #000;
+}
+
+.q-card {
+  width: 400px;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+}
+</style>

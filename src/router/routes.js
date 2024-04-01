@@ -3,7 +3,8 @@ const routes = [
     path: "/",
     component: () => import("layouts/MainLayout.vue"),
     children: [
-      { path: "/news", component: () => import("pages/NewsPage.vue") },
+      { path: "/pids", component: () => import("pages/NewsPage.vue") },
+      { path: "/pids/:pidId", component: () => import("pages/PidDetailPage.vue") },
       {
         path: "/community",
         component: () => import("pages/CommunityPage.vue"),
@@ -20,6 +21,8 @@ const routes = [
       { path: "/apod", component: () => import("pages/apod.vue") },
       { path: "/mars", component: () => import("pages/mars.vue") },
       { path: "/withdrawalPage", component: () => import("pages/WithdrawalPage.vue") },
+      { path: "/updatePasswordPage", component: () => import("pages/updatePasswordPage.vue") },
+      { path: "/send-password-code", component: () => import("pages//SendPasswordCode.vue") },
     ],
   },
 

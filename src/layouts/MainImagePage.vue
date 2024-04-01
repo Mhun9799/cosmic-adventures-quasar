@@ -4,7 +4,7 @@
     <img src="https://tobirobucket.s3.ap-northeast-2.amazonaws.com/profile/ec9ee40f-5b48-4279-bc62-9767e9e8030b-%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202024-03-29%20%EC%98%A4%ED%9B%84%209.00.17.png" alt="Main Image" class="main-image">
 
     <!-- 입장하기 버튼 -->
-    <button @click="enterMainLayout" class="enter-button">입장하기</button>
+    <button @click="goToMainLayout" class="enter-button">입장하기</button>
   </div>
 </template>
 
@@ -12,8 +12,8 @@
 export default {
   name: "MainImagePage",
   methods: {
-    enterMainLayout() {
-      // MainLayout 페이지로 이동하는 코드
+    goToMainLayout() {
+      // 주어진 경로로 이동하는 코드
       this.$router.push('/main-layout');
     }
   }
