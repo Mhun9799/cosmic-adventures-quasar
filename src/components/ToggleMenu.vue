@@ -13,6 +13,11 @@
             <q-item-label class="profile-label">나의 프로필 수정</q-item-label>
           </q-item-section>
         </q-item>
+        <q-item clickable @click="goTo('/updatePasswordPage')">
+          <q-item-section>
+            <q-item-label class="profile-label">나의 비밀번호 수정</q-item-label>
+          </q-item-section>
+        </q-item>
         <q-item clickable @click="goTo('/MyPosts')">
           <q-item-section>
             <q-item-label class="profile-label">나의 게시글</q-item-label>
@@ -33,6 +38,12 @@
         <q-item clickable @click="goTo('/withdrawalPage')">
           <q-item-section>
             <q-item-label class="logout-label">탈퇴하기</q-item-label>
+          </q-item-section>
+        </q-item>
+        <!-- "탈퇴취소하기" 항목 -->
+        <q-item clickable @click="cancelWithdrawal">
+          <q-item-section>
+            <q-item-label class="logout-label">탈퇴 취소하기</q-item-label>
           </q-item-section>
         </q-item>
       </q-list>
@@ -71,6 +82,25 @@ export default {
         }
       } catch (error) {
         console.error('로그아웃 요청 중 오류가 발생했습니다.', error);
+      }
+    },
+    async cancelWithdrawal() {
+      try {
+        const accessToken = Cookies.get("Authorization");
+        const response = await axios.delete('http://localhost:8080/api/v1/users/withdrawalCancel', {
+          headers: {
+            'Authorization': `Bearer ${accessToken}`
+          }
+        });
+        if (response.status === 200) {
+          alert('탈퇴가 성공적으로 취소되었습니다.');
+          // 원하는 동작 수행 (예: 페이지 리로드)
+          window.location.reload();
+        } else {
+          console.error('탈퇴 취소 요청에 실패했습니다.');
+        }
+      } catch (error) {
+        console.error('탈퇴 취소 요청 중 오류가 발생했습니다.', error);
       }
     },
     goTo(path) {
