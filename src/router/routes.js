@@ -1,10 +1,6 @@
 const routes = [
   {
     path: "/",
-    component: () => import("layouts/MainImagePage.vue"), // 메인 이미지 페이지로 수정
-  },
-  {
-    path: "/main-layout",
     component: () => import("layouts/MainLayout.vue"),
     children: [
       { path: "/pids", component: () => import("pages/NewsPage.vue") },
@@ -17,8 +13,8 @@ const routes = [
       { path: "/signup", component: () => import("pages/SignupPage.vue") },
       { path: "/mypage", component: () => import("pages/MyPage.vue") },
       { path: "/isstracker", component: () => import("pages/ISSTrackerPage.vue") },
-      { path: "/posts/create", component: () => import("pages/PostCreate.vue") },
-      { path: "/posts/:postId", component: () => import("pages/PostDisplay.vue") },
+      { path: '/posts/create', component: () => import('pages/PostCreate.vue') },
+      { path: '/posts/:postId', component: () => import('pages/PostDisplay.vue') },
       { path: "/edit_profile", component: () => import("pages/Edit_profile.vue") },
       { path: "/Myposts", component: () => import("pages/MyPosts.vue") },
       { path: "/MyLikes", component: () => import("pages/MyLikes.vue") },

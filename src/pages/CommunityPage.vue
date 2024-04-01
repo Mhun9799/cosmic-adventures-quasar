@@ -20,7 +20,6 @@ const posts = ref([]);
 onMounted(async () => {
   try {
     const response = await axios.get('http://localhost:8080/boards/creates');
-    console.log(response.data)
     posts.value = response.data;
   } catch (error) {
     console.error('Error fetching posts:', error);
