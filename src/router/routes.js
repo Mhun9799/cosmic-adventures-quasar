@@ -16,9 +16,10 @@ const routes = [
       { path: '/posts/:postId', component: () => import('pages/PostDisplay.vue') },
       { path: "/edit_profile", component: () => import("pages/Edit_profile.vue") },
       { path: "/Myposts", component: () => import("pages/MyPosts.vue") },
-      { path: "/posts/:postId/edit", component: () => import("pages/PostUpdate.vue")}
-
-
+      { path: "/MyLikes", component: () => import("pages/MyLikes.vue") },
+      { path: "/apod", component: () => import("pages/apod.vue") },
+      { path: "/mars", component: () => import("pages/mars.vue") },
+      { path: "/withdrawalPage", component: () => import("pages/WithdrawalPage.vue") },
     ],
   },
 

@@ -81,7 +81,7 @@ export default {
 
           const { name } = response.data;
           alert(`${name}님 환영합니다!`);
-          window.location.href = 'http://localhost:9000';
+          window.location.href = 'http://localhost:9000/#/main-layout';
         })
         .catch(error => {
           // 에러 응답 처리
@@ -134,11 +134,45 @@ export default {
   border: none; /* 네모칸을 없애는 스타일 */
   cursor: pointer;
   padding: 0;
+  transition: transform 0.2s; /* 호버 효과를 위한 CSS 트랜지션 추가 */
+}
+
+/* 호버 효과: 마우스를 올렸을 때 아이콘을 약간 확대 */
+.social-login-button button:hover {
+  transform: scale(1.1);
 }
 
 /* 이미지를 센터 정렬하는 스타일 */
 img {
   display: block;
-  margin: 30px;
+  margin: 10px; /* 이미지 간격 조정 */
+  transition: filter 0.2s; /* 호버 효과를 위한 CSS 트랜지션 추가 */
+}
+
+/* 호버 효과: 마우스를 올렸을 때 이미지에 투명도 효과 추가 */
+img:hover {
+  filter: brightness(85%); /* 이미지의 밝기를 줄임 */
+}
+
+/* 각 소셜 로그인 버튼에 대한 배경색 및 여백 설정 */
+.social-googlelogin-button,
+.social-kakaologin-button,
+.social-naverlogin-button {
+  margin: 5px; /* 각 버튼 사이의 여백 조정 */
+}
+
+/* 각 소셜 로그인 버튼에 대한 배경색 및 둥근 테두리 설정 */
+.social-googlelogin-button button,
+.social-kakaologin-button button,
+.social-naverlogin-button button {
+  background-color: #ffffff; /* 버튼 배경색 */
+  border-radius: 5px; /* 버튼 둥근 테두리 설정 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
+}
+
+/* 소셜 로그인 버튼 이미지 크기 및 여백 조정 */
+.social-login-button button img {
+  width: 100px; /* 이미지 폭 조정 */
+  height: auto; /* 이미지 높이 자동 조정 */
 }
 </style>
