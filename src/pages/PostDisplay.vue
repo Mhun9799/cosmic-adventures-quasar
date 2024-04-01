@@ -1,23 +1,33 @@
 <template>
   <q-page>
     <div v-if="post" class="post-container">
-      <div class="button-container">
-<!--        <div class="button-profile"><img src="https://cdn.quasar.dev/img/boy-avatar.png" class="profile-img"></div>-->
-        <q-btn label="Edit" @click="startEdit" color="primary"/>
-        <q-btn label="Remove" @click="confirmRemoval" color="negative" class="remove-button"/>
-      </div>
-      <div class="post-content">
-        <h2 class="post-title">{{ post.title }}</h2>
-        <p class="post-body" v-html="post.content"></p>
-        <div class="post-images" v-if="post.image && post.image.length > 0">
-          <img v-for="(image, index) in post.image" :key="index" :src="image" :alt="'Image ' + (index + 1)" />
-        </div>
-        <div class="post-footer">
+      <div class="board">
+        <q-toolbar class="bg-primary text-white">
+          <q-space />
+          <q-btn label="Edit" @click="startEdit" color="primary" class="edit-button"/>
+          <q-btn label="Remove" @click="confirmRemoval" color="negative" class="remove-button"/>
+        </q-toolbar>
+        <div class="post-content">
+          <h2 class="post-title">{{ post.title }}</h2>
+          <p class="post-body" v-html="post.content"></p>
+          <div class="post-images" v-if="post.image && post.image.length > 0">
+            <img v-for="(image, index) in post.image" :key="index" :src="image" :alt="'Image ' + (index + 1)" />
+          </div>
+          <div class="post-footer">
 
-          <div><q-btn label="Like" @click="likeUp" color="pink" class="like-btn"/></div>
-          <p class="post-createAt">24.03.28</p>
+            <div><q-btn label="Like" @click="likeUp" color="pink" class="like-btn"/></div>
+
+            <p class="post-createAt">24.03.28</p>
+          </div>
+        </div>
+        <q-input rounded standout v-model="newCommentText" label="댓글 추가" />
+        <q-btn label="댓글 달기" @click="addComment" />
+        <div v-for="comment in comments" :key="comment.id">
+          <CommentItem :comment="comment" />
         </div>
       </div>
+
+
     </div>
     <div v-else class="loading-container">
       <q-circular-progress
@@ -36,29 +46,53 @@ import { ref, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import axios from 'axios';
 import { apiClient } from "src/api/apiClient";
+import CommentItem from "components/CommentItem.vue";
 
+const comments = ref([]);
+const newCommentText = ref('');
 const post = ref(null);
 const route = useRoute();
 const router = useRouter();
 
-onMounted(async () => {
+//댓글 추가
+async function addComment() {
+  const commentData = {
+    content: newCommentText.value
+  };
   try {
-    const postId = route.params.postId;
+    const  postId = route.params.postId
+    const response = await apiClient.post(`http://localhost:8080/boards/comments?boardId=${postId}`, commentData, {})
+    const newComment = response.data;
+    comments.value.push(newComment);
+    newCommentText.value = ''; // 입력 필드 초기화
+    await fetchComments();
+  } catch (error) {
+    console.log('Error fetching type', error)
+  }
+}
+async function fetchComments() {
+  const postId = route.params.postId
+  try {
+    const responseComments = await axios.get(`http://localhost:8080/boards/comments?boardId=${postId}`);
+    comments.value = responseComments.data;
+  } catch (error) {
+    console.error('Error fetching comments:', error);
+  }
+}
+onMounted(async () => {
+  const postId = route.params.postId;
+
+  try {
+    // 게시글 불러오기
     const response = await axios.get(`http://localhost:8080/boards/${postId}`);
     post.value = response.data;
   } catch (error) {
     console.error('Error fetching post:', error);
   }
+  //댓글 불러오기
+  await fetchComments();
 });
-onMounted(async () => {
-  try {
-    const postId = route.params.postId;
-    const response = await axios.get(`http://localhost:8080/boards/comments/${postId}`);
-    post.value = response.data;
-  } catch (error) {
-    console.error('Error fetching post:', error);
-  }
-});
+
 
 function startEdit() {
   router.push(`/posts/${route.params.postId}/edit`);
@@ -89,21 +123,15 @@ async function likeUp() {
 </script>
 
 <style>
+.board {
+  border-radius: 10px;
+  margin: 0 100px 0 100px;
+}
 .post-container {
   padding: 20px;
   border-radius: 10px;
   background-color: #f0f0f0;
 }
-
-.button-container {
-  display: flex;
-  justify-content: flex-end;
-  width: 79%;
-  margin: 10px 0 10px 94px;
-}
-
-.button-fo
-
 
 .edit-button, .remove-button {
   margin-left: 10px;
@@ -114,9 +142,10 @@ async function likeUp() {
   padding: 20px;
   background-color: #fff;
   border-radius: 10px;
-  margin: auto;
-  width: 80%;
-
+}
+.post-footer {
+  display: flex;
+  justify-content: space-between;
 }
 
 .post-title {
