@@ -1,55 +1,33 @@
 <template>
-  <div class="q-pa-md row items-start q-gutter-md">
-    <q-card class="my-card" flat bordered>
-      <q-img :src="imageUrl" />
-
-      <q-card-section>
-        <div class="text-overline text-orange-9">{{ category }}</div>
-        <div class="text-h5 q-mt-sm q-mb-xs">{{ title }}</div>
-        <div class="text-caption text-grey">{{ summary }}</div>
-      </q-card-section>
-
-      <q-card-actions>
-        <q-btn flat color="primary" label="Share" />
-        <q-btn flat color="secondary" label="Book" />
-
-        <q-space />
-
-        <q-btn
-          color="grey"
-          round
-          flat
-          dense
-          :icon="expanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down'"
-          @click="expanded = !expanded"
-        />
-      </q-card-actions>
-
-      <q-slide-transition>
-        <div v-show="expanded">
-          <q-separator />
-          <q-card-section class="text-subtitle2">
-            {{ content }}
-          </q-card-section>
-        </div>
-      </q-slide-transition>
-    </q-card>
-  </div>
+  <router-link :to="`/pids/${pid.id}`">
+    <div class="news-item">
+<!--      <img :src="pid.imageUrl" alt="PID Image" class="card-image">-->
+      <div class="card-content">
+        <div class="text-h6">{{ pid.title }}</div>
+        <div class="text-caption text-grey">{{ pid.category }}</div>
+        <div class="text-body">{{ pid.content }}</div>
+      </div>
+    </div>
+  </router-link>
 </template>
 
 <script setup>
-import { ref } from "vue";
-
-const expanded = ref(false);
-
 defineProps({
-  id: { type: String, required: true },
-  title: { type: String, required: true },
-  summary: { type: String, required: true },
-  content: { type: String, required: true },
-  imageUrl: { type: String, required: true },
-  category: { type: String, required: true },
+  pid: {type: Object, required: true},
 });
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+.news-item {
+  border: 1px solid #ccc;
+  margin: 10px; /* Adjust spacing between items */
+  padding: 15px;
+  border-radius: 5px;
+}
+.card-image {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+}
+/* Other styles for card content */
+</style>
