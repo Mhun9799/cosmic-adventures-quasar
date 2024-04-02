@@ -39,8 +39,10 @@ async function fetchPosts() {
       title: post.title,
       content: post.content,
       likeCount: post.likeCount,
-      imageUrl: post.image[0] // 첫 번째 이미지만 사용하거나, 필요에 따라 다른 방식으로 처리
+      imageUrl: post.image[0], // 첫 번째 이미지만 사용하거나, 필요에 따라 다른 방식으로 처리
+      authorImage: post.profilePicUrl // 게시글 작성자의 프로필 사진 URL
     }));
+
   } catch (error) {
     if (error.response && error.response.status === 401) {
       // 만료된 액세스 토큰으로 요청했을 때

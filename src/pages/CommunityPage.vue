@@ -6,9 +6,9 @@
 </template>
 
 <script setup>
-import { useQuasar} from 'quasar';
+import {useQuasar} from 'quasar';
 import PostList from '../components/PostList.vue';
-import { ref, onMounted } from 'vue';
+import {ref, onMounted} from 'vue';
 import axios from 'axios';
 import {useRouter} from "vue-router";
 
@@ -34,5 +34,4 @@ function navigateToCreatePost() {
     // Maybe display an error message to the user
   }
 }
-
 </script>
