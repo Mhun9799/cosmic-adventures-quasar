@@ -118,13 +118,7 @@ export default {
         }
       }
     },
-    openImageModal() {
-      this.showImageModal = true;
-    },
-
-    closeImageModal() {
-      this.showImageModal = false;
-    },
+    // openImageModal, closeImageModal 메서드 등 나머지 메서드는 생략합니다.
   }
 };
 </script>

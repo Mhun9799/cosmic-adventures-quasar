@@ -1,42 +1,41 @@
 <template>
-  <q-item clickable :to="`/posts/${post.id}`" class="post-item">
-    <q-item-section avatar>
-      <q-avatar size="md">
-        <img :src="post.authorImage || defaultAvatar" />
-      </q-avatar>
-    </q-item-section>
+  <div class="post-item">
+    <q-item clickable :to="`/posts/${post.id}`" class="post-item">
+      <q-item-section avatar>
+        <q-avatar size="md">
+          <!-- Display the profile picture of the post author -->
+          <img :src="post.authorImage || post.profilePicUrl || defaultAvatar" alt=""/>
 
-    <q-item-section>
-      <div class="text-h6">{{ post.title }}</div>
-<!--      <div class="text-caption text-grey-6">{{ post.content }}</div>-->
+        </q-avatar>
+      </q-item-section>
 
-      <div class="row text-caption">
-<!--        <div class="col">-->
-<!--          <q-icon name="visibility" size="sm" /> {{ post.readCount }}-->
-<!--        </div>-->
-        <div class="col">
-          <q-icon name="chat" size="sm" /> {{ post.commentCount }}
+      <q-item-section>
+        <div class="text-h6">{{ post.title }}</div>
+        <div class="row text-caption">
+          <div class="col">
+            <q-icon name="chat" size="sm" /> {{ post.commentCount }}
+          </div>
+          <div class="col">
+            <q-icon name="favorite" size="sm" /> {{ post.likeCount }}
+          </div>
         </div>
-
-        <div class="col">
-          <q-icon name="favorite" size="sm" /> {{ post.likeCount }}
-        </div>
-      </div>
-    </q-item-section>
-  </q-item>
+      </q-item-section>
+    </q-item>
+  </div>
 </template>
 
 <script setup>
+import { defineProps } from 'vue';
+
+const defaultAvatar = 'https://cdn.quasar.dev/img/boy-avatar.png'; // Or any placeholder image
+
 defineProps({
   post: {
     type: Object,
     required: true,
   },
 });
-
-const defaultAvatar = 'https://cdn.quasar.dev/img/boy-avatar.png'; // Or any placeholder image
 </script>
-
 
 <style scoped>
 .post-item {

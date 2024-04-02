@@ -1,6 +1,6 @@
 <template>
   <div>
-    <q-btn flat round dense icon="account_circle" @click="toggleMenu"/>
+    <q-btn flat round dense icon="account_circle" @click="toggleMenu" class="toggle-menu-icon"/>
     <q-drawer v-model="menuOpen" side="right" overlay bordered content-class="custom-drawer" :content-style="{ backgroundColor: '#37474F' }">
       <q-list>
         <q-item clickable @click="goTo('/mypage')">
@@ -128,5 +128,8 @@ export default {
 
 .logout-label {
   color: red;
+}
+.toggle-menu-icon {
+  margin-right: 17rem; /* 토글 메뉴 아이콘을 오른쪽으로 이동시키는 마진 값을 조정합니다. */
 }
 </style>

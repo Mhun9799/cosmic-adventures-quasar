@@ -6,9 +6,9 @@
 </template>
 
 <script setup>
-import { useQuasar} from 'quasar';
+import {useQuasar} from 'quasar';
 import PostList from '../components/PostList.vue';
-import { ref, onMounted } from 'vue';
+import {ref, onMounted} from 'vue';
 import axios from 'axios';
 import {useRouter} from "vue-router";
 
@@ -20,7 +20,6 @@ const posts = ref([]);
 onMounted(async () => {
   try {
     const response = await axios.get('http://localhost:8080/boards/creates');
-    console.log(response.data)
     posts.value = response.data;
   } catch (error) {
     console.error('Error fetching posts:', error);
@@ -35,5 +34,4 @@ function navigateToCreatePost() {
     // Maybe display an error message to the user
   }
 }
-
 </script>

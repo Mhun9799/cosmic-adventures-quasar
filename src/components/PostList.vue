@@ -1,7 +1,6 @@
 <template>
   <div class="container">
     <div class="sidebar">
-      내용
       <!-- Sidebar content goes here -->
     </div>
     <div class="content">
@@ -10,17 +9,14 @@
       </div>
     </div>
     <div class="right-sidebar">
-<!--      <div v-if="!isLoggedIn">-->
-<!--        <p>로그인이 필요합니다.</p>-->
-<!--        <q-btn label="로그인" color="primary" @click="goToLoginPage" />-->
-<!--      </div>-->
+      <!-- Additional content goes here -->
     </div>
   </div>
-
 </template>
 
 <script setup>
 import PostItem from './PostItem.vue';
+
 defineProps({
   posts: {
     type: Array,
@@ -28,35 +24,42 @@ defineProps({
   },
 });
 </script>
-<style>
-.right-sidebar {
-  flex: 1;
-  background-color: #f0f0f0;
-  padding: 20px;
-}
+
+<style scoped>
+/* Container styles */
 .container {
   display: flex;
   background-color: black;
 }
 
+/* Sidebar styles */
 .sidebar {
   flex: 1;
   background-color: #f0f0f0;
   padding: 20px;
 }
 
+/* Content styles */
 .content {
   flex: 3;
   padding: 20px;
 }
 
+/* Right sidebar styles */
+.right-sidebar {
+  flex: 1;
+  background-color: #f0f0f0;
+  padding: 20px;
+}
+
+/* Post list styles */
 .post-list {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-/* 게시글 아이템 스타일 */
+/* Post item styles */
 .post-item {
   background-color: #ffffff;
   padding: 20px;
