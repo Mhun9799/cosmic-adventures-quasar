@@ -1,3 +1,5 @@
+import { createRouter, createWebHistory } from 'vue-router';
+
 const routes = [
   {
     path: "/",
@@ -9,10 +11,7 @@ const routes = [
     children: [
       { path: "/pids", component: () => import("pages/NewsPage.vue") },
       { path: "/pids/:pidId", component: () => import("pages/PidDetailPage.vue") },
-      {
-        path: "/community",
-        component: () => import("pages/CommunityPage.vue"),
-      },
+      {path: "/community", component: () => import("pages/CommunityPage.vue"),},
       { path: "/login", component: () => import("pages/LoginPage.vue") },
       { path: "/signup", component: () => import("pages/SignupPage.vue") },
       { path: "/mypage", component: () => import("pages/MyPage.vue") },
@@ -26,9 +25,12 @@ const routes = [
       { path: "/mars", component: () => import("pages/mars.vue") },
       { path: "/withdrawalPage", component: () => import("pages/WithdrawalPage.vue") },
       { path: "/updatePasswordPage", component: () => import("pages/updatePasswordPage.vue") },
-      { path: "/send-password-code", component: () => import("pages//SendPasswordCode.vue") },
+      { path: "/send-password-code", component: () => import("pages/SendPasswordCode.vue") },
+      { path: "/contact", component: () => import("pages/contactPage.vue") },
+      { path: "/Home", component: () => import("pages/homePage.vue") },
     ],
   },
+
 
   // Always leave this as last one,
   // but you can also remove it
@@ -37,5 +39,6 @@ const routes = [
     component: () => import("pages/ErrorNotFound.vue"),
   },
 ];
+
 
 export default routes;
