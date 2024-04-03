@@ -7,6 +7,7 @@
 
       <q-card-section>
         <q-input outlined v-model="name" label="이름" />
+        <q-input outlined v-model="nickname" label="닉네임" />
         <q-input outlined v-model="email" label="이메일" />
         <q-input outlined type="password" v-model="password" label="비밀번호" />
         <q-input outlined type="password" v-model="confirmpassword" label="비밀번호 확인" />
@@ -49,6 +50,7 @@ export default {
       confirmpassword: '',
       introduction: '',
       phoneNumber: '',
+      nickname:'',
       role: null, // 역할 선택을 위한 변수 추가
       profilePicture: '', // 프로필 사진 초기값을 비어있도록 수정
       roleOptions: [ // 역할 선택 옵션
@@ -69,6 +71,7 @@ export default {
       // Construct FormData object
       const formData = new FormData();
       formData.append('name', this.name);
+      formData.append('nickname', this.nickname);
       formData.append('email', this.email);
       formData.append('password', this.password);
       formData.append('confirmpassword', this.confirmpassword);
