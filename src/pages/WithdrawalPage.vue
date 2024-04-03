@@ -37,7 +37,7 @@ export default {
           document.cookie = 'RefreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
 
           alert('회원 탈퇴가 성공적으로 처리되었습니다.');
-          this.$router.push({ path: "/main-layout" });
+          this.$router.push({ path: "/Home" });
         } else {
           throw new Error('회원 탈퇴 요청이 실패했습니다.');
         }
