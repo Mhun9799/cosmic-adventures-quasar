@@ -2,9 +2,9 @@
   <q-page>
     <div v-if="post" class="post-container">
       <div class="board">
+        <h2>{{ post.name }}</h2>
         <q-toolbar class="bg-primary text-white">
           <q-space />
-          <div> </div>
           <q-btn label="Remove" @click="confirmRemoval" color="negative" class="remove-button"/>
         </q-toolbar>
         <div class="post-content">
@@ -170,7 +170,6 @@ async function likeUp() {
   padding: 0 10px; /* 좌우 여백을 10px로 설정 */
 }
 .q-input {
-  background-color: #222; /* 입력 필드 배경색을 어두운 회색으로 설정 */
   color: #fff; /* 입력 텍스트 색상을 흰색으로 설정 */
   border: 1px solid #444; /* 경계선 추가 */
 }
