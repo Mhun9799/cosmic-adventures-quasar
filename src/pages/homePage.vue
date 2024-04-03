@@ -120,7 +120,7 @@ export default {
 
 .eclipse__box {
   position: absolute;
-  top: calc(20% + 0px); /* 이미지의 높이만큼 추가해서 텍스트 위치 조정 */
+  top: calc(15% + 0px); /* 이미지의 높이만큼 추가해서 텍스트 위치 조정 */
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;

@@ -83,7 +83,7 @@ export default {
 
           const { name } = response.data;
           alert(`${name}님 환영합니다!`);
-          window.location.href = 'http://localhost:9000/#/main-layout';
+          window.location.href = 'http://localhost:9000/#/Home';
         })
         .catch(error => {
           // 에러 응답 처리

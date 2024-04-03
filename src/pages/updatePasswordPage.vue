@@ -47,7 +47,7 @@ export default {
           }
         });
         alert(response.data);
-        this.$router.push('/main-layout');
+        this.$router.push('/Home');
       } catch (error) {
         console.error('비밀번호 수정 중 오류:', error);
         // 서버에서 받은 에러 메시지 표시

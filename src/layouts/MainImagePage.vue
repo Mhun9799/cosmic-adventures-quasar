@@ -19,7 +19,7 @@ export default {
   methods: {
     goToMainLayout() {
       // 주어진 경로로 이동하는 코드
-      this.$router.push('/main-layout');
+      this.$router.push('/Home'); // 수정: '/Home' 경로로 이동하도록 수정
     }
   }
 }
@@ -39,9 +39,14 @@ export default {
   align-items: center; /* 아이템들을 수직으로 가운데 정렬합니다. */
   animation: fadeIn 2s ease-in-out;
 }
+
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .video-wrapper {

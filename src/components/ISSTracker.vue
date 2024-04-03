@@ -3,7 +3,7 @@
     <div id="map"></div>
     <div id="content">
       <h2>ISS 현재 위치</h2>
-      <p>국제우주정거장의 현재 위치를 실시간으로 확인할 수 있습니다.</p>
+      <p>국제우주정거장의 현재 위치를 실시간으로 움직임을 확인할 수 있습니다.</p>
       <div id="astronautInfo">
         <button class="toggle-button" @click="toggleAstronautInfo">실제 ISS 비행사 정보</button>
         <div v-if="showAstronautInfo" class="astronaut-info">
@@ -54,7 +54,7 @@ export default {
       this.updateISSLocation();
     },
     updateISSLocation() {
-      fetch('https://api.open-notify.org/iss-now.json')
+      fetch('http://api.open-notify.org/iss-now.json')
         .then(response => response.json())
         .then(data => {
           const latitude = parseFloat(data.iss_position.latitude);
