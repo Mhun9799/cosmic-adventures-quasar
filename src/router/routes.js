@@ -5,10 +5,7 @@ const routes = [
     children: [
       { path: "/pids", component: () => import("pages/NewsPage.vue") },
       { path: "/pids/:pidId", component: () => import("pages/PidDetailPage.vue") },
-      {
-        path: "/community",
-        component: () => import("pages/CommunityPage.vue"),
-      },
+      { path: "/community", component: () => import("pages/CommunityPage.vue"),},
       { path: "/login", component: () => import("pages/LoginPage.vue") },
       { path: "/signup", component: () => import("pages/SignupPage.vue") },
       { path: "/mypage", component: () => import("pages/MyPage.vue") },

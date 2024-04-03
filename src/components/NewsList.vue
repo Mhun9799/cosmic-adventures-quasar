@@ -1,7 +1,5 @@
 <template>
   <div class="q-pa-md">
-    <h1> PIDs </h1>
-
     <div class="flex-container">
       <NewsItem v-for="pid in pids" :key="pid.id" :pid="pid" class="flex-item" />
     </div>
