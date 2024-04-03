@@ -1,5 +1,5 @@
 <template>
-  <div class="nasa-apod-container">
+  <div :class="{ 'loading': loading }" class="nasa-apod-container">
     <h1 class="nasa-apod-title">{{ loading ? '로딩 중...' : nasaImage.title }}</h1>
     <p class="nasa-apod-explanation" v-if="!loading">{{ nasaImage.explanation }}</p>
     <div class="image-container" v-if="!loading">
@@ -51,6 +51,7 @@ body {
   color: #fff; /* 텍스트 색상을 흰색으로 설정 */
   padding: 150px; /* 내부 여백 추가 */
   text-align: center; /* 텍스트와 이미지를 가운데 정렬 */
+  height: 100vh; /* 페이지 전체 높이 */
 }
 
 .nasa-apod-title {
