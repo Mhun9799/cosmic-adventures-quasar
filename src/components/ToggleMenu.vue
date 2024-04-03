@@ -1,7 +1,7 @@
 <template>
   <div>
     <q-btn flat round dense icon="account_circle" @click="toggleMenu" class="toggle-menu-icon"/>
-    <q-drawer v-model="menuOpen" side="right" overlay bordered content-class="custom-drawer" :content-style="{ backgroundColor: '#37474F' }">
+    <q-drawer v-model="menuOpen" side="right" overlay bordered content-class="custom-drawer" :content-style="{ backgroundColor: '#333' }">
       <q-list>
         <q-item clickable @click="goTo('/mypage')">
           <q-item-section>
@@ -118,6 +118,9 @@ export default {
 </script>
 
 <style scoped>
+.q-drawer-content.custom-drawer {
+  background-color: #222 !important; /* 사이드바의 배경색을 #222로 변경합니다. */
+}
 .clickable-title:hover {
   cursor: pointer;
 }

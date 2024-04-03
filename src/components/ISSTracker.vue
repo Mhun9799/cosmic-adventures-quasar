@@ -54,7 +54,7 @@ export default {
       this.updateISSLocation();
     },
     updateISSLocation() {
-      fetch('http://api.open-notify.org/iss-now.json')
+      fetch('https://api.open-notify.org/iss-now.json')
         .then(response => response.json())
         .then(data => {
           const latitude = parseFloat(data.iss_position.latitude);
@@ -98,6 +98,7 @@ export default {
   position: relative;
   width: 100%;
   height: 100vh;
+  background-color: black; /* 배경색 검정색으로 설정 */
 }
 
 #map {
@@ -116,6 +117,7 @@ export default {
   transform: translateX(-50%);
   width: 80%;
   text-align: center;
+  color: white; /* 글씨색 하얀색으로 설정 */
 }
 
 #content h2 {

@@ -19,9 +19,12 @@ const routes = [
       { path: "/mars", component: () => import("pages/mars.vue") },
       { path: "/withdrawalPage", component: () => import("pages/WithdrawalPage.vue") },
       { path: "/updatePasswordPage", component: () => import("pages/updatePasswordPage.vue") },
-      { path: "/send-password-code", component: () => import("pages//SendPasswordCode.vue") },
+      { path: "/send-password-code", component: () => import("pages/SendPasswordCode.vue") },
+      { path: "/contact", component: () => import("pages/contactPage.vue") },
+      { path: "/Home", component: () => import("pages/homePage.vue") },
     ],
   },
+
 
   // Always leave this as last one,
   // but you can also remove it
