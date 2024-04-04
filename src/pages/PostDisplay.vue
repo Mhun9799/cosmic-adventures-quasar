@@ -2,9 +2,9 @@
   <q-page>
     <div v-if="post" class="post-container">
       <div class="board">
-        <q-toolbar class="bg-primary text-white">
+        <h2>{{ post.name }}</h2>
+        <q-toolbar>
           <q-space />
-          <q-btn label="Edit" @click="startEdit" color="primary" class="edit-button"/>
           <q-btn label="Remove" @click="confirmRemoval" color="negative" class="remove-button"/>
         </q-toolbar>
         <div class="post-content">
@@ -14,11 +14,10 @@
             <img v-for="(image, index) in post.image" :key="index" :src="image" :alt="'Image ' + (index + 1)" />
           </div>
           <div class="post-footer">
-
             <div><q-btn label="Like" @click="likeUp" color="pink" class="like-btn"/></div>
-
-            <p class="post-createAt">24.03.28</p>
+            <p class="post-createAt">{{ post.creatAt }}</p>
           </div>
+          <p>{{ post.likeCount }}</p>
         </div>
         <q-input rounded standout v-model="newCommentText" label="댓글 추가" />
         <q-btn label="댓글 달기" @click="addComment" />
@@ -123,14 +122,20 @@ async function likeUp() {
 </script>
 
 <style>
+.q-page {
+  background-color: #000; /* 배경색을 검은색으로 설정 */
+  color: #fff; /* 전체 텍스트 색상을 흰색으로 설정 */
+}
 .board {
   border-radius: 10px;
   margin: 0 100px 0 100px;
 }
 .post-container {
+  margin: 50px auto; /* 상하 여백을 50px로, 좌우는 자동으로 설정하여 중앙 정렬 */
+  width: 80%; /* 너비를 80%로 설정 */
   padding: 20px;
   border-radius: 10px;
-  background-color: #f0f0f0;
+  background-color: #333; /* 게시글 배경색을 어두운 회색으로 설정 */
 }
 
 .edit-button, .remove-button {
@@ -140,8 +145,9 @@ async function likeUp() {
 
 .post-content {
   padding: 20px;
-  background-color: #fff;
+  background-color: #222; /* 내용 배경색을 더 어두운 회색으로 설정 */
   border-radius: 10px;
+  border: 1px solid #444; /* 경계선 추가 */
 }
 .post-footer {
   display: flex;
@@ -163,16 +169,19 @@ async function likeUp() {
   line-height: 1.6;
   padding: 0 10px; /* 좌우 여백을 10px로 설정 */
 }
-
+.q-input {
+  color: #fff; /* 입력 텍스트 색상을 흰색으로 설정 */
+  border: 1px solid #444; /* 경계선 추가 */
+}
+.q-input::placeholder {
+  color: #aaa; /* 플레이스홀더 텍스트 색상을 밝은 회색으로 설정 */
+}
 .post-images img {
   max-width: 100%;
   border-radius: 5px;
 }
 
 .loading-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100px;
+  background-color: #000; /* 배경색을 검은색으로 설정 */
 }
 </style>

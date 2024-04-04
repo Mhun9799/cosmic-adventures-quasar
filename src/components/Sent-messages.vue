@@ -1,5 +1,6 @@
 <template>
   <div class="inbox">
+    <div class="close-button" @click="closeModalModal">✖️</div>
     <h2 class="inbox-title">📬 보낸 편지함</h2>
     <div v-if="messages.length === 0" class="no-messages">편지가 없습니다.</div>
     <div v-else class="message-list">
@@ -117,6 +118,9 @@ export default {
     },
     closeModal() {
       this.showModalFlag = false; // 모달을 닫습니다.
+    },
+    closeModalModal() {
+      this.$emit('close');
     },
     prevPage() {
       if (this.currentPage > 1) {
@@ -277,6 +281,13 @@ export default {
 .pagination button:disabled {
   cursor: not-allowed;
   opacity: 0.6;
+}
+.close-button {
+  position: absolute;
+  top: 10px; /* 상단 여백 조정 */
+  right: 10px; /* 우측 여백 조정 */
+  cursor: pointer;
+  pointer-events: auto; /* 마우스 이벤트 허용 */
 }
 
 </style>

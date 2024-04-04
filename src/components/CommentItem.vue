@@ -1,8 +1,8 @@
 <template>
-  <p> 프로필</p>
+  <p> {{ comment.name }} </p>
   <div class="comment-model">
     <div class="comment-item">{{ comment.content }}</div>
-    <p> 날짜 </p>
+    <p> {{ comment.likeCount }} </p>
   </div>
 </template>
 

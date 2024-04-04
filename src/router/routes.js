@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router';
-
 const routes = [
   {
     path: "/",
@@ -34,8 +33,6 @@ const routes = [
       { path: "/venus", component: () => import("pages/VenusPage.vue") },
     ],
   },
-
-
   // Always leave this as last one,
   // but you can also remove it
   {
@@ -43,6 +40,4 @@ const routes = [
     component: () => import("pages/ErrorNotFound.vue"),
   },
 ];
-
-
 export default routes;
