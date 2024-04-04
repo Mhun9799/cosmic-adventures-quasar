@@ -3,7 +3,7 @@
     <div v-if="post" class="post-container">
       <div class="board">
         <h2>{{ post.name }}</h2>
-        <q-toolbar class="bg-primary text-white">
+        <q-toolbar>
           <q-space />
           <q-btn label="Remove" @click="confirmRemoval" color="negative" class="remove-button"/>
         </q-toolbar>

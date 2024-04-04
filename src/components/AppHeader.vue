@@ -20,9 +20,9 @@
     <!-- 새로운 쪽지 보내기 컴포넌트 -->
     <message-window v-if="messageWindowOpen" @close="closeMessageWindow"/>
     <!-- 받은 쪽지함 컴포넌트 -->
-    <received-messages v-if="receivedMessagesOpen" />
+    <received-messages v-if="receivedMessagesOpen" @close="closeReceivedMessages" />
     <!-- 보낸 쪽지함 컴포넌트 -->
-    <sent-messages v-if="sentMessagesOpen" /> <!-- 보낸 편지함 컴포넌트 추가 -->
+    <sent-messages v-if="sentMessagesOpen" @close="closeSentMessages"/>  <!-- 보낸 편지함 컴포넌트 추가 -->
   </div>
 </template>
 
@@ -78,13 +78,20 @@ export default {
       }
       this.receivedMessagesOpen = !this.receivedMessagesOpen; // 받은 쪽지함의 상태를 토글합니다.
     },
+    closeReceivedMessages() {
+      this.receivedMessagesOpen = false; // 받은편지함 창을 닫습니다.
+    },
     toggleSentMessages() {
       if (!this.accessToken) {
         alert("로그인이 필요합니다. 로그인 해주세요.");
         return;
       }
       this.sentMessagesOpen = !this.sentMessagesOpen; // 보낸 편지함의 상태를 토글합니다.
+    },
+    closeSentMessages() {
+      this.sentMessagesOpen = false;
     }
+
   }
 };
 </script>

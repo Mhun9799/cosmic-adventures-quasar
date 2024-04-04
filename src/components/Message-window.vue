@@ -46,8 +46,10 @@ export default {
 
         console.log(response.data);
         this.clearFields();
+
         // 전송 완료 후 알림을 띄웁니다.
         alert("💌 전송이 완료되었습니다.");
+
         // 쪽지 보내는 창을 닫습니다.
         this.$emit('close');
       } catch (error) {
