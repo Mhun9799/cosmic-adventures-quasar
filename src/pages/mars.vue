@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     fetchMarsRoverData() {
-      axios.get("http://localhost:8080/api/v1/mars-rovers/recent")
+      axios.get("http://dearforbearance.com/api/v1/mars-rovers/recent")
         .then(response => {
           this.marsRoverData = response.data;
         })

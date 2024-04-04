@@ -27,7 +27,7 @@ export default {
   methods: {
     async fetchNasaImage() {
       try {
-        const response = await axios.get('http://localhost:8080/api/v1/nasa/apod');
+        const response = await axios.get('http://dearforbearance.com/api/v1/nasa/apod');
         this.nasaImage = response.data;
         this.loading = false; // 이미지 로딩이 완료되면 로딩 상태 변경
         console.log(response);

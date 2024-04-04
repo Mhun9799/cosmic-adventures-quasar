@@ -38,7 +38,7 @@ export default {
           console.error('Access token not found in cookie.');
           return;
         }
-        const response = await axios.put('http://localhost:8080/api/v1/users/my-password', {
+        const response = await axios.put('http://dearforbearance.com/api/v1/users/my-password', {
           userPassword: this.userPassword,
           userNewPassword: this.userNewPassword
         }, {

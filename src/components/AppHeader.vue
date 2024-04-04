@@ -54,8 +54,6 @@ export default {
       const storedToken = Cookies.get("Authorization");
       if (storedToken) {
         this.accessToken = storedToken;
-      } else {
-        this.goTo("/login");
       }
     },
     toggleSidebar() {

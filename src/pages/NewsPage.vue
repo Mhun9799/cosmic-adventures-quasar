@@ -30,7 +30,7 @@ const selectedField = ref('title'); // Initial selection
 
 onMounted(async () => {
   try {
-    const response = await axios.get(`http://localhost:8080/pids`); // Adjust path as needed
+    const response = await axios.get(`http://dearforbearance.com/pids`); // Adjust path as needed
     pids.value = response.data.content;
   } catch (error) {
     // Handle errors

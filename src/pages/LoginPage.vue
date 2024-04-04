@@ -63,7 +63,7 @@ export default {
   methods: {
     socialLogin(provider) {
       // 소셜 로그인 엔드포인트로 리다이렉트
-      window.location.href = `http://localhost:8080/oauth2/login/${provider}`;
+      window.location.href = `http://dearforbearance.com/oauth2/login/${provider}`;
     },
     login() {
       const loginData = {
@@ -72,7 +72,7 @@ export default {
         verificationCode: this.verificationCode,
         role: this.role,
       };
-      axios.post('http://localhost:8080/api/v1/users/login', loginData,{ withCredentials: true })
+      axios.post('http://dearforbearance.com/api/v1/users/login', loginData,{ withCredentials: true })
         .then(response => {
           // 응답 헤더에서 토큰 추출
           const authorizationHeader = response.headers['authorization'];
@@ -83,7 +83,7 @@ export default {
 
           const { name } = response.data;
           alert(`${name}님 환영합니다!`);
-          window.location.href = 'http://localhost:9000/#/Home';
+          window.location.href = 'http://dearforbearance.com/#/Home';
         })
         .catch(error => {
           // 에러 응답 처리

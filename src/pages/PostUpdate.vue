@@ -34,7 +34,7 @@ const router = useRouter();
 const postId = route.params.postId;
 onMounted(async () => {
   try {
-    const response = await axios.get(`http://localhost:8080/boards/${postId}`);
+    const response = await axios.get(`http://localhost/boards/${postId}`);
     const postData = response.data;
 
     // 기존 게시물 정보를 편집 폼에 설정
@@ -63,7 +63,7 @@ async function updatePost() {
         formData.append("images", image);
       });
     }
-    await apiClient.put(`http://localhost:8080/boards/${postId}`, formData);
+    await apiClient.put(`/boards/${postId}`, formData);
 
     // 게시물 수정 후 상세 페이지로 이동
     await router.push(`/posts/${postId}`);

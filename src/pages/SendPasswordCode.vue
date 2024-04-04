@@ -36,7 +36,7 @@ export default {
   methods: {
     async sendPasswordResetCode() {
       try {
-        const response = await axios.post('http://localhost:8080/api/v1/users/send-password-code', {
+        const response = await axios.post('http://dearforbearance.com/api/v1/users/send-password-code', {
           email: this.email1,
           phoneNumber: this.phoneNumber1
         });
@@ -48,7 +48,7 @@ export default {
     },
     async sendTemporaryPassword() {
       try {
-        const response = await axios.post('http://localhost:8080/api/v1/users/temporary-password', {
+        const response = await axios.post('http://dearforbearance.com/api/v1/users/temporary-password', {
           email: this.email2,
           phoneNumber: this.phoneNumber2,
           code: this.code

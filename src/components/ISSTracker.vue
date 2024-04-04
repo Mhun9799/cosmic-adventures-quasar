@@ -73,7 +73,7 @@ export default {
     async toggleAstronautInfo() {
       if (!this.showAstronautInfo) {
         try {
-          const response = await axios.get('http://localhost:8080/api/v1/iss/astronauts');
+          const response = await axios.get('http://dearforbearance.com/api/v1/iss/astronauts');
           this.astronauts = response.data.map(astronaut => ({
             name: astronaut.name,
             image: 'https://www.nasa.gov/wp-content/uploads/2023/05/exp70-portrait.jpg?resize=2000,1600'

@@ -84,7 +84,7 @@ export default {
       }
 
       // Send API Request to Backend
-      axios.post('http://localhost:8080/api/v1/users/signup', formData, {
+      axios.post('http://dearforbearance.com/api/v1/users/signup', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
