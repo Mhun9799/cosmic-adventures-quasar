@@ -3,7 +3,7 @@
     <div class="post-create">
       <q-form @submit.prevent="submitPost">
         <div><q-input v-model="postTitle" label="Title" /></div>
-        <div><q-editor v-model="postContent" /></div>
+        <div><q-editor class="custom-editor" v-model="postContent" /></div>
         <div><q-file v-model="postImages" multiple label="Upload Images (Optional)" /></div>
         <div>
           <q-btn type="submit" label="Create Post" />
@@ -34,7 +34,6 @@ async function submitPost() {
   formData.append('title', postTitle.value);
   formData.append('content', postContent.value);
   postImages.value.forEach(file => formData.append('images', file));
-
   try {
     // 응답헤더에 토큰값도 같이 보내기
     await apiClient.post('/boards', formData, {
@@ -46,8 +45,11 @@ async function submitPost() {
 }
 </script>
 <style>
-.post-title {
+.custom-editor .q-editor__content,
+.custom-editor .q-editor__content .ql-editor {
+  color: black; /* 텍스트 색상을 검은색으로 설정 */
 }
+
 .post-create {
   background-color: #f0f0f0;
 }

@@ -34,7 +34,7 @@ onMounted(async () => {
   try {
 
     const pidId = route.params.pidId;
-    const response = await axios.get(`http://localhost:8080/pids/${pidId}`);
+    const response = await axios.get(`http://dearforbearance.com/pids/${pidId}`);
     pid.value = response.data;
   } catch (error) {
     console.error('Error fetching post:', error);

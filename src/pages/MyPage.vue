@@ -76,7 +76,7 @@ export default {
           this.errorMessage = 'Access token not found in cookie.';
           return;
         }
-        const response = await axios.get('http://localhost:8080/api/v1/users/profile', {
+        const response = await axios.get('http://dearforbearance.com/api/v1/users/profile', {
           headers: {
             Authorization: `Bearer ${token}`
           }

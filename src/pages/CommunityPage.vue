@@ -56,7 +56,7 @@ const posts = ref([]);
 
 onMounted(async () => {
   try {
-    const response = await axios.get('http://localhost:8080/boards/creates');
+    const response = await axios.get('http://dearforbearance.com/boards/creates');
     posts.value = response.data;
   } catch (error) {
     console.error('Error fetching posts:', error);

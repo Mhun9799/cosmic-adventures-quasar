@@ -60,7 +60,7 @@ async function addComment() {
   };
   try {
     const  postId = route.params.postId
-    const response = await apiClient.post(`http://localhost:8080/boards/comments?boardId=${postId}`, commentData, {})
+    const response = await apiClient.post(`/boards/comments?boardId=${postId}`, commentData, {})
     const newComment = response.data;
     comments.value.push(newComment);
     newCommentText.value = ''; // 입력 필드 초기화
@@ -72,7 +72,7 @@ async function addComment() {
 async function fetchComments() {
   const postId = route.params.postId
   try {
-    const responseComments = await axios.get(`http://localhost:8080/boards/comments?boardId=${postId}`);
+    const responseComments = await axios.get(`http://dearforbearance.com/boards/comments?boardId=${postId}`);
     comments.value = responseComments.data;
   } catch (error) {
     console.error('Error fetching comments:', error);
@@ -83,7 +83,7 @@ onMounted(async () => {
 
   try {
     // 게시글 불러오기
-    const response = await axios.get(`http://localhost:8080/boards/${postId}`);
+    const response = await axios.get(`http://dearforbearance.com/boards/${postId}`);
     post.value = response.data;
   } catch (error) {
     console.error('Error fetching post:', error);
@@ -105,7 +105,7 @@ function confirmRemoval() {
 
 async function removePost() {
   try {
-    await apiClient.delete(`http://localhost:8080/boards/${route.params.postId}`);
+    await apiClient.delete(`/boards/${route.params.postId}`);
     await router.push('/community');
   } catch (error) {
     console.error("Error removing post:", error);
@@ -114,7 +114,7 @@ async function removePost() {
 
 async function likeUp() {
   try {
-    await apiClient.post(`http://localhost:8080/boards/${route.params.postId}`)
+    await apiClient.post(`/boards/${route.params.postId}`)
   } catch (error) {
     console.error("Error LikeUp Post", error)
   }

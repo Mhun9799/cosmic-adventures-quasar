@@ -55,7 +55,7 @@ export default {
       try {
         // Send API Request to Backend
         const token = this.getAccessTokenFromCookie();
-        const response = await axios.put('http://localhost:8080/api/v1/users/profile-edit', formData, {
+        const response = await axios.put('http://dearforbearance.com/api/v1/users/profile-edit', formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
             'Authorization': `Bearer ${token}`

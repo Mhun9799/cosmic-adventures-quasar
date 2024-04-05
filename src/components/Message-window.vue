@@ -34,7 +34,7 @@ export default {
       }
 
       try {
-        const response = await axios.post('http://localhost:8080/api/v1/messages', {
+        const response = await axios.post('http://dearforbearance.com/api/v1/messages', {
           title: this.title,
           content: this.content,
           receiverName: this.receiverName

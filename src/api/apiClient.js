@@ -3,7 +3,7 @@ import axios from "axios";
 //서버 연결하는 부분
 export const apiClient = axios.create({
 //baseURL = 서버 주소
-baseURL: "http://localhost:8080",
+baseURL: "http://dearforbearance.com",
 headers: {
 "Access-Control-Allow-Origin": "*",
 // "Content-Type": "application/json",

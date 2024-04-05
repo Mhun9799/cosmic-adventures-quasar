@@ -67,7 +67,7 @@ export default {
     async logout() {
       try {
         const accessToken = Cookies.get("Authorization");
-        const response = await axios.get('http://localhost:8080/api/v1/users/logout', {
+        const response = await axios.get('http://dearforbearance.com/api/v1/users/logout', {
           headers: {
             'Authorization': `Bearer ${accessToken}`
           }
@@ -87,7 +87,7 @@ export default {
     async cancelWithdrawal() {
       try {
         const accessToken = Cookies.get("Authorization");
-        const response = await axios.delete('http://localhost:8080/api/v1/users/withdrawalCancel', {
+        const response = await axios.delete('http://dearforbearance.com/api/v1/users/withdrawalCancel', {
           headers: {
             'Authorization': `Bearer ${accessToken}`
           }

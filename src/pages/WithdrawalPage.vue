@@ -23,7 +23,7 @@ export default {
       try {
         const accessToken = this.getAccessTokenFromCookie();
 
-        const response = await axios.delete(`http://localhost:8080/api/v1/users/withdrawal`, {
+        const response = await axios.delete(`http://dearforbearance.com/api/v1/users/withdrawal`, {
           headers: {
             Authorization: `Bearer ${accessToken}`
           }

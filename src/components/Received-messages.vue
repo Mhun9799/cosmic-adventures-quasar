@@ -73,7 +73,7 @@ export default {
 
       try {
         // 서버에 GET 요청을 보내 받은 편지함을 가져옵니다.
-        const response = await axios.get('http://localhost:8080/api/v1/messages/received', {
+        const response = await axios.get('http://dearforbearance.com/api/v1/messages/received', {
           headers: {
             'Authorization': `Bearer ${storedToken}` // 헤더에 엑세스 토큰을 포함시킵니다.
           }
